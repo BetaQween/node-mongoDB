@@ -20,10 +20,20 @@ app.post('/todos', (req, res) => {
   })
 });
 
+app.get('/todos', (req, res) => {
+  Todo.find().then((todos) => {
+    res.send({todos})
+  }, (e) => {
+    res.status(400).send(e);
+  })
+});
+
 app.listen(port, () => {
   console.log('port: ', port);
 });
 
+
+module.exports = {app};
 // var newTodo = new Todo({
 //   text: 'Cook dinner'
 // });
@@ -32,14 +42,4 @@ app.listen(port, () => {
 //   console.log('Save todo', doc);
 // }, (e) => {
 //   console.log('Unable to save todo');
-// });
-
-
-// var User = new User({
-//   email: 'olga@mail.ru'
-// });
-// User.save().then((res) => {
-//   console.log(JSON.stringify(res, undefined, 2));
-// }, (err) => {
-//   console.log(err);
 // });
